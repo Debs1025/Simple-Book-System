@@ -5,14 +5,14 @@ const bookValidator = {
     body('title').notEmpty().withMessage('Title is required'),
     body('author').notEmpty().withMessage('Author is required'),
     body('genre').notEmpty().withMessage('Genre is required'),
-    body('publishedDate').isDate().withMessage('Published date must be a valid date'),
+    body('publishedYear').isInt({ min: 1000, max: new Date().getFullYear() }).withMessage('Published year must be a valid year'),
   ],
   
   updateBook: [
     body('title').optional().notEmpty().withMessage('Title cannot be empty'),
     body('author').optional().notEmpty().withMessage('Author cannot be empty'),
     body('genre').optional().notEmpty().withMessage('Genre cannot be empty'),
-    body('publishedDate').optional().isDate().withMessage('Published date must be a valid date'),
+    body('publishedYear').optional().isInt({ min: 1000, max: new Date().getFullYear() }).withMessage('Published year must be a valid year'),
   ],
 
   validate: (req, res, next) => {
